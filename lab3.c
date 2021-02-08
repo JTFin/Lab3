@@ -7,7 +7,7 @@
 #include <pthread.h>
 
 #define N 5
-#define LEFT (i+N-1) % N
+#define LEFT (i+N-1) %N
 #define RIGHT (i+1) %N
 #define THINKING 0
 #define HUNGRY 1
@@ -60,7 +60,7 @@ void take_forks(long i) {
 	//printf("Take forks statement\n");
 	pthread_mutex_unlock(&mutex); //down
 	state[i] = HUNGRY;
-	printf("Philosopher %ld is hungry\n",i);
+	//printf("Philosopher %ld is hungry\n",i);
 	test(i);
 	pthread_mutex_lock(&mutex); //up
 	pthread_mutex_unlock(&s[i]); //down
@@ -69,15 +69,18 @@ void take_forks(long i) {
 void put_forks(long i) {
 	//printf("Put forks statement\n");
 	pthread_mutex_unlock(&mutex); //down
+	if (state[i] == EATING)
+	{
+		printf("Philosopher %ld is now done eating\n",i);
+	}
 	state[i] = THINKING;
-	printf("Philosopher %ld is now done eating\n",i+1);
 	test(LEFT);		// see if the left neighbour can now eat
 	test(RIGHT);	// see if the right neighbour can now eat
 	pthread_mutex_lock(&mutex); //up
 }
 void test(long i) {
 	//printf("Test statement\n");
-	if(state[i]=HUNGRY && state[LEFT] != EATING && state[RIGHT] != EATING) {
+	if(state[i] == HUNGRY && state[LEFT] != EATING && state[RIGHT] != EATING) {
 		state[i] = EATING;
 		printf("Philosopher %ld is now eating\n",i);
 		pthread_mutex_lock(&s[i]); //up
