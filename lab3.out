@@ -1,16 +1,25 @@
-Philosopher statement
-Philosopher 0 is thinking
-Philosopher 1 is thinking
-Philosopher statement
-Philosopher 2 is thinking
-Philosopher 3 is thinking
-Philosopher statement
-Philosopher statement
-Philosopher 4 is thinking
-Philosopher statement
-Take forks statement
-Take forks statement
-Take forks statement
-Take forks statement
-Take forks statement
-Segmentation fault
+Philosopher 0 is hungry
+Philosopher 0 is now eating
+Philosopher 2 is hungry
+Philosopher 2 is now eating
+Philosopher 3 is hungry
+Philosopher 4 is hungry
+Philosopher 1 is hungry
+Philosopher 4 is now done eating
+Philosopher 2 is now eating
+Philosopher 5 is now done eating
+Philosopher 0 is now eating
+Philosopher 2 is now done eating
+Philosopher 0 is now eating
+Philosopher 1 is now done eating
+Philosopher 4 is now eating
+Philosopher 2 is now eating
+Philosopher 3 is now done eating
+Philosopher 1 is now eating
+Philosopher 4 is now eating
+Philosopher 1 is now eating
+Philosopher 2 is hungry
+Philosopher 3 is now done eating
+Philosopher 1 is now eating
+Philosopher 1 is hungry
+Philosopher 1 is now eating
