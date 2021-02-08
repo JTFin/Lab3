@@ -34,10 +34,9 @@ int main(int argc, char **argv) {
 	pthread_mutex_init(s, NULL);
 	for(i=0;i<N;i++){
 		pthread_create(&thread[i],NULL,philosopher,&philosopherCount[i]);
-    	printf("Philosopher %d is thinking\n",i);//remove later
 	}
 	for(i=0;i<N;i++){
-       pthread_join(thread[i],NULL);
+       		pthread_join(thread[i],NULL);
 	}
 
 	pthread_exit(NULL);
@@ -57,6 +56,7 @@ void *philosopher(void *j) {
 void take_forks(long i) {
 
 	printf("Take forks statement\n");
+	
 	pthread_mutex_unlock(&mutex); //down
 	state[i] = HUNGRY;
 	printf("Philosopher %ld is hungry\n",i);
@@ -78,6 +78,7 @@ void put_forks(long i) {
 }
 void test(long i) {
 	printf("Test statement\n");
+	
 	if(state[i]=HUNGRY && state[LEFT] != EATING && state[RIGHT] != EATING) {
 		state[i] = EATING;
 		printf("Philosopher %ld is now eating\n",i);
