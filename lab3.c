@@ -23,21 +23,21 @@ void test(long i);
 void *philosopher(void *i);
 
 int main(int argc, char **argv) {
+
 	int i;
-	//state[N] = THINKING; 
-	for(i=0;i<N;i++);
-        state[i] = THINKING;
-
 	pthread_t thread[N];
+	for(i=0;i<N;i++){
+        state[i] = THINKING;
+	}
 
-	for (i=0;i<N;i++)
-	{
+	for (i=0;i<N;i++){
 		pthread_mutex_init(&s[i], NULL);
 	}
 	
 	for(i=0;i<N;i++){
-		pthread_create(&thread[i],NULL,philosopher,&philosopherCount[i]);
+		pthread_create(&thread[i],NULL,philosopher, (void*) philosopherCount[i]);
 	}
+
 	for(i=0;i<N;i++){
        pthread_join(thread[i],NULL);
 	}
@@ -45,7 +45,7 @@ int main(int argc, char **argv) {
 	pthread_exit(NULL);
 }
 void *philosopher(void *j) {
-	printf("Philosopher statement\n");
+	//printf("Philosopher statement\n");
 	while(1) {
 		long i = (long) j;
 		sleep(1); //think
@@ -57,8 +57,7 @@ void *philosopher(void *j) {
 	}
 }
 void take_forks(long i) {
-
-	printf("Take forks statement\n");
+	//printf("Take forks statement\n");
 	pthread_mutex_unlock(&mutex); //down
 	state[i] = HUNGRY;
 	printf("Philosopher %ld is hungry\n",i);
@@ -68,18 +67,16 @@ void take_forks(long i) {
 
 }
 void put_forks(long i) {
-
-	printf("Put forks statement\n");
-
+	//printf("Put forks statement\n");
 	pthread_mutex_unlock(&mutex); //down
 	state[i] = THINKING;
-	printf("Philosopher %ld is now done eating\n",i);
+	printf("Philosopher %ld is now done eating\n",i+1);
 	test(LEFT);		// see if the left neighbour can now eat
 	test(RIGHT);	// see if the right neighbour can now eat
 	pthread_mutex_lock(&mutex); //up
 }
 void test(long i) {
-	printf("Test statement\n");
+	//printf("Test statement\n");
 	if(state[i]=HUNGRY && state[LEFT] != EATING && state[RIGHT] != EATING) {
 		state[i] = EATING;
 		printf("Philosopher %ld is now eating\n",i);
